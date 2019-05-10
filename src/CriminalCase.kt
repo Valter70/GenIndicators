@@ -74,10 +74,8 @@ class CriminalCase(wbIn: HSSFWorkbook, currentRowIndex: Int) {
             var currentDate: LocalDate? = null
             if (currentRow.sheet.getRow(rowIndex).getCell(cellIndex).dateCellValue != null)
                 currentDate = java.sql.Date(currentRow.sheet.getRow(rowIndex).getCell(cellIndex).dateCellValue.time).toLocalDate()
-            when {
-                result == null && currentDate != null -> result = currentDate
-                result != null && currentDate != null && result > currentDate -> result = currentDate
-            }
+            if (isChangeDate(result, currentDate))
+                result = currentDate
             rowIndex++
         }
         return result
@@ -85,6 +83,9 @@ class CriminalCase(wbIn: HSSFWorkbook, currentRowIndex: Int) {
 
     private fun isRowMarge(rowIndex: Int) : Boolean =
         rowIndex <= currentRow.sheet.lastRowNum && currentRow.sheet.getRow(rowIndex).getCell(0).numericCellValue == 0.0
+
+    private fun isChangeDate(oldDate: LocalDate?, newDate: LocalDate?) : Boolean =
+        (oldDate == null && newDate != null) || (oldDate != null && newDate != null && oldDate > newDate)
 
     private fun getDecisionDateValue() : LocalDate? {
         val cellIndex = titleList.indexOf("Ф11 ЄРДР Дата введення")

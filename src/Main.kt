@@ -17,8 +17,3 @@ fun main(args: Array<String>) {
     saveWorkbookToFile(wbIn, OUTPUT_FILE_NAME)
 }
 
-fun saveWorkbookToFile(wb: HSSFWorkbook, outFileName: String) {
-    val fileOut = FileOutputStream(outFileName)
-    wb.write(fileOut)
-    fileOut.close()
-}
