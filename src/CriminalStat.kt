@@ -1,8 +1,29 @@
+import org.apache.poi.hssf.usermodel.HSSFRow
 import org.apache.poi.hssf .usermodel.HSSFWorkbook
 import java.io.FileInputStream
+import java.io.FileOutputStream
 
 val titleList = getHeaderNames()
 val crimeList = createCrimeListFromXLS()
+
+fun writeIndicators(currentRow: HSSFRow) {
+    currentRow.getCell(SUSPISION_COLUMN).setCellValue(Indicators().suspicionAll)
+    currentRow.getCell(SUSPISION_COLUMN + 1).setCellValue(Indicators().suspicionCurrent)
+    currentRow.getCell(SUSPISION_COLUMN + 2).setCellValue(Indicators().suspisionGravity)
+
+    currentRow.getCell(COURT_COLUMN).setCellValue(Indicators().toCourtCase)
+    currentRow.getCell(COURT_COLUMN + 1).setCellValue(Indicators().toCourtEpisode)
+
+    currentRow.getCell(CLOSE_COLUMN).setCellValue(Indicators().closedAll)
+    currentRow.getCell(CLOSE_COLUMN + 1).setCellValue(Indicators().closedCurrent)
+}
+
+fun saveWorkbookToFile(wb: HSSFWorkbook, outFileName: String) {
+    val fileOut = FileOutputStream(outFileName)
+    wb.write(fileOut)
+    fileOut.close()
+}
+
 
 private fun createCrimeListFromXLS() : List<CriminalCase> {
     val wbStat = HSSFWorkbook(FileInputStream(CRIME_FILE_NAME))
@@ -18,7 +39,6 @@ private fun createCrimeListFromXLS() : List<CriminalCase> {
         currentRecord++
     }
 
-    //crimeList.removeAt(0)
     return crimeList
 }
 
