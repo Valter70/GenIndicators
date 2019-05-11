@@ -3,8 +3,8 @@ class Indicators {
         get() = getSuspicionAllValue()
     val suspicionCurrent: Double
         get() = getSuspicionCurrentValue()
-    val suspisionGravity: Double
-        get() = getSuspisionGravityValue()
+    val suspicionGravity: Double
+        get() = getSuspicionGravityValue()
     val toCourtCase: Double
         get() = getToCourtCaseValue()
     val toCourtEpisode: Double
@@ -18,7 +18,7 @@ class Indicators {
 
     private fun getSuspicionCurrentValue() : Double  = crimeList.filter { it.suspicionDate?.monthValue == CURRENT_MONTH && it.isCurrentYear }.size.toDouble()
 
-    private fun getSuspisionGravityValue() : Double  = crimeList.filter { it.suspicionDate?.monthValue == CURRENT_MONTH && it.gravity == Gravity.T3 }.size.toDouble()
+    private fun getSuspicionGravityValue() : Double  = crimeList.filter { it.suspicionDate?.monthValue == CURRENT_MONTH && it.gravity == Gravity.T3 }.size.toDouble()
 
     private fun getToCourtCaseValue() : Double = crimeList.filter { it.decision in sentToCourtCase && !it.isCombined && it.decisionDate?.monthValue == CURRENT_MONTH}.size.toDouble()
 

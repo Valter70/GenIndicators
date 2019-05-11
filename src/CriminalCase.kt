@@ -19,8 +19,6 @@ class CriminalCase(wbIn: HSSFWorkbook, currentRowIndex: Int) {
 
     private fun getNumberValue() : String {
         var numKP = ""
-        if (currentRow.getCell(0).numericCellValue == 0.0)
-            return "00000"
         for(i in 0..2) {
             val partOfNumber = currentRow.getCell(i).numericCellValue.toInt().toString()
             numKP += partOfNumber
