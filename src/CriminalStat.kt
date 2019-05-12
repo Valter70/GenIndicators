@@ -7,9 +7,9 @@ val titleList = getHeaderNames()
 val crimeList = createCrimeListFromXLS()
 
 fun writeIndicators(currentRow: HSSFRow) {
-    currentRow.getCell(SUSPISION_COLUMN).setCellValue(Indicators().suspicionAll)
-    currentRow.getCell(SUSPISION_COLUMN + 1).setCellValue(Indicators().suspicionCurrent)
-    currentRow.getCell(SUSPISION_COLUMN + 2).setCellValue(Indicators().suspicionGravity)
+    currentRow.getCell(SUSPICION_COLUMN).setCellValue(Indicators().suspicionAll)
+    currentRow.getCell(SUSPICION_COLUMN + 1).setCellValue(Indicators().suspicionCurrent)
+    currentRow.getCell(SUSPICION_COLUMN + 2).setCellValue(Indicators().suspicionGravity)
 
     currentRow.getCell(COURT_COLUMN).setCellValue(Indicators().toCourtCase)
     currentRow.getCell(COURT_COLUMN + 1).setCellValue(Indicators().toCourtEpisode)

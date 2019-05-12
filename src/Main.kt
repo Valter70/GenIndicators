@@ -1,19 +1,26 @@
-import org.apache.poi.hssf.usermodel.*
-import java.io.*
+﻿import javafx.application.Application
+import javafx.fxml.FXMLLoader.load
+import javafx.scene.Parent
+import javafx.scene.Scene
+import javafx.stage.Stage
 
-fun main(args: Array<String>) {
+@Suppress("JAVA_CLASS_ON_COMPANION")
+class Main : Application() {
 
-    CRIME_FILE_NAME = args[0]
-    INPUT_FILE_NAME = args[1]
-    OUTPUT_FILE_NAME = args[2]
-    val wbIn = HSSFWorkbook(FileInputStream(INPUT_FILE_NAME))
-    wbIn.forceFormulaRecalculation = true
-    val sheetIn = wbIn.getSheetAt(0)
+    private val layout = "main.fxml"
 
-    val currentRow = sheetIn.getRow(LAST_HEADER_ROW + CURRENT_MONTH)
+    override fun start(primaryStage: Stage?) {
+        //System.setProperty("prism.lcdtext", "false") // for beautiful fonts on linux
+        primaryStage?.title = "Вхідні данні"
+        primaryStage?.scene = Scene(load<Parent?>(Main.javaClass.getResource(layout)))
+        primaryStage?.show()
+    }
 
-    writeIndicators(currentRow)
-
-    saveWorkbookToFile(wbIn, OUTPUT_FILE_NAME)
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            launch(Main::class.java)
+            genIndicator()
+        }
+    }
 }
-
