@@ -9,11 +9,14 @@ enum class Decision(val statName: String) {
     ZUP1("ЗУПИНЕНО СТ.280 Ч.1.П.1 КПК"),
     ZUP2("ЗУПИНЕНО СТ.280 Ч.1.П.2 КПК"),
     SUD("З ОБВИНУВАЛЬНИМ АКТОМ"),
-    UG_P("У Т.Ч. З УГОДОЮ ПРО ПРИМИРЕННЯ")
+    UG_P("У Т.Ч. З УГОДОЮ ПРО ПРИМИРЕННЯ"),
+    UG_V("У Т.Ч. З УГОДОЮ ПРО ВИЗНАННЯ ВИНУВАТОСТІ"),
+    KL_49("З КЛОПОТАННЯМ ПРО ЗВІЛЬНЕННЯ ВІД КРИМ.ВІДП. СТ.49"),
+    KL_44("З КЛОПОТАННЯМ ПРО ЗВІЛЬНЕННЯ ВІД КРИМ.ВІДП. СТ.44")
 }
 
 val closeCase = setOf(Decision.ZAK1, Decision.ZAK2, Decision.ZAK14)
-val sentToCourtCase = setOf(Decision.SUD, Decision.UG_P, Decision.ZAK5, Decision.ZAK7)
+val sentToCourtCase = setOf(Decision.SUD, Decision.UG_P, Decision.UG_V, Decision.ZAK5, Decision.ZAK7, Decision.KL_49, Decision.KL_44)
 
 fun getCodeDecision(strDecision: String) =
     when(strDecision){
@@ -26,6 +29,9 @@ fun getCodeDecision(strDecision: String) =
         "ЗУПИНЕНО СТ.280 Ч.1.П.2 КПК" -> Decision.ZUP2
         "З ОБВИНУВАЛЬНИМ АКТОМ" -> Decision.SUD
         "У Т.Ч. З УГОДОЮ ПРО ПРИМИРЕННЯ" -> Decision.UG_P
-        else -> throw IndexOutOfBoundsException("Невірна назва тяжкості: $strDecision")
+        "У Т.Ч. З УГОДОЮ ПРО ВИЗНАННЯ ВИНУВАТОСТІ" -> Decision.UG_V
+        "З КЛОПОТАННЯМ ПРО ЗВІЛЬНЕННЯ ВІД КРИМ.ВІДП. СТ.49" -> Decision.KL_49
+        "З КЛОПОТАННЯМ ПРО ЗВІЛЬНЕННЯ ВІД КРИМ.ВІДП. СТ.44" -> Decision.KL_44
+        else -> throw IndexOutOfBoundsException("Невизначене рішення: $strDecision")
     }
 
