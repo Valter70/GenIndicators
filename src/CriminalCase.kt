@@ -42,7 +42,7 @@ class CriminalCase(wbIn: HSSFWorkbook, currentRowIndex: Int) {
 
     private fun getGravityValue() : Gravity {
         val gravityCell = titleList.indexOf("Ф1 14.Квал.злоч.-тяжкiсть")
-        return getCodeGravity(currentRow.getCell(gravityCell).stringCellValue)
+        return Gravity.values().find { it.statName == currentRow.getCell(gravityCell).stringCellValue }!!
     }
 
     private fun getCombinedValue() : Boolean {
